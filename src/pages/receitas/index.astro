@@ -1,0 +1,16 @@
+---
+import { getCollection } from "astro:content";
+import SampleLayout from "../../layouts/SampleLayout.astro";
+import Recipe from "../../components/Recipe.astro";
+
+const recipes = (await getCollection("receitas")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<SampleLayout>
+    <section>
+        {recipes.length === 0 && <p>Nenhuma receita encontrada.</p>}
+        {recipes.map((recipe) => <Recipe recipe={recipe} />)}
+    </section>
+</SampleLayout>

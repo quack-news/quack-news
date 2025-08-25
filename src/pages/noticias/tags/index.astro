@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+
+import SampleLayout from "../../../layouts/SampleLayout.astro";
+
+const allNews = await getCollection("noticias");
+
+const uniqueTags = [
+    ...new Set(allNews.map((news: any) => news.data.tags).flat()),
+];
+---
+
+<SampleLayout title="noticias">
+    <ul>
+        {
+            uniqueTags.map((tag) => (
+                <li><a href={`noticias/tags/${tag}/`}>{tag}</a></li>
+            ))
+        }
+    </ul>
+</SampleLayout>

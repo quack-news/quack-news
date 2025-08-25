@@ -1,0 +1,18 @@
+---
+import { getCollection } from "astro:content";
+import SampleLayout from "../../layouts/SampleLayout.astro";
+
+import News from "../../components/News.astro";
+
+const news = (await getCollection("noticias")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<SampleLayout>
+    <h1>Notícias Semanais</h1>
+
+    <section>
+        {news.map((singleNews) => <News singleNews={singleNews} />)}
+    </section>
+</SampleLayout>

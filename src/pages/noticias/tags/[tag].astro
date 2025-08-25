@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+import SampleLayout from "../../../layouts/SampleLayout.astro";
+
+export async function getStaticPaths() {
+    const allNews = await getCollection("noticias");
+
+    const uniqueTags = [
+        ...new Set(allNews.map((news: any) => news.data.tags).flat()),
+    ];
+
+    return uniqueTags.map((tag) => {
+        const filteredNews = allNews.filter((news: any) =>
+            news.data.tags.includes(tag),
+        );
+        return {
+            params: { tag },
+            props: { news: filteredNews },
+        };
+    });
+}
+
+const { tag } = Astro.params;
+const { news } = Astro.props;
+---
+
+<SampleLayout title={`Notícias - ${tag}`}>
+    <p>Notícias com a tag <b>{tag}</b></p>
+    <ul>
+        {
+            news.map((news) => (
+                <li>
+                    <a href={`/noticias/${news.id}/`}>{news.data.title}</a>
+                </li>
+            ))
+        }
+    </ul>
+</SampleLayout>

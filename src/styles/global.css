@@ -1,0 +1,65 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Open+Sans:wght@400;600&display=swap");
+
+.main-head {
+  grid-area: header;
+}
+
+.content {
+  grid-area: content;
+}
+
+.main-nav {
+  grid-area: nav;
+}
+
+.side-left {
+  grid-area: side-left;
+}
+
+.side-right {
+  grid-area: side-right;
+}
+
+.ad {
+  grid-area: ad;
+}
+
+.main-footer {
+  grid-area: footer;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-areas:
+    "header"
+    "nav"
+    "content"
+    "side-left"
+    "side-right"
+    "footer";
+}
+
+@media (min-width: 500px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "nav"
+      "content"
+      "side-left"
+      "side-right"
+      "footer";
+  }
+}
+
+@media (min-width: 700px) {
+  .wrapper {
+    grid-template-columns: 2fr 5fr 2fr;
+    grid-template-areas:
+      "header  header header"
+      "nav nav nav"
+      "side-left content side-right"
+      "side-left content side-right"
+      "footer footer  footer";
+  }
+}

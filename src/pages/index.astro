@@ -1,16 +1,20 @@
 ---
+import { getCollection } from "astro:content";
+import SampleLayout from "../layouts/SampleLayout.astro";
+import News from "../components/News.astro";
 
+// Busca todas as notícias, ordenando da mais recente para a mais antiga
+const news = (await getCollection("noticias")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<SampleLayout>
+  <h1>Notícias em Destaque</h1>
+  <section>
+    {news.length === 0 && <p>Nenhuma notícia encontrada.</p>}
+    {news.map((singleNews) => (
+      <News singleNews={singleNews} />
+    ))}
+  </section>
+</SampleLayout>
