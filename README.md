@@ -1,47 +1,70 @@
-# Astro Starter Kit: Minimal
+# Quack News
 
-```sh
-npm create astro@latest -- --template minimal
+> Um agregador de notícias simples desenvolvido com Astro.
+
+Este projeto é um site estático focado em performance, utilizando [Astro](https://astro.build/) e [Svelte](https://svelte.dev/).
+
+## 🚀 Como Rodar o Projeto
+
+Siga os passos abaixo para executar o projeto localmente.
+
+### Pré-requisitos
+
+*   **Node.js**: Certifique-se de ter o Node.js instalado (versão 18 ou superior recomendada).
+*   **pnpm**: Este projeto utiliza `pnpm` como gerenciador de pacotes (devido ao arquivo `pnpm-lock.yaml`). Se não tiver, você pode instalar com `npm install -g pnpm` ou usar `npm` mesmo.
+
+### Instalação
+
+1.  Clone o repositório (se ainda não o fez):
+    ```bash
+    git clone https://github.com/seu-usuario/quack-news.git
+    cd quack-news
+    ```
+
+2.  Instale as dependências:
+    ```bash
+    pnpm install
+    # ou, se preferir npm:
+    # npm install
+    ```
+
+### Executando em Desenvolvimento
+
+Para iniciar o servidor de desenvolvimento local:
+
+```bash
+pnpm dev
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+O site estará disponível em `http://localhost:4321`.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🛠️ Scripts Disponíveis
 
-## 🚀 Project Structure
+*   `pnpm dev`: Inicia o servidor de desenvolvimento.
+*   `pnpm build`: Gera a versão de produção do site na pasta `dist/`.
+*   `pnpm preview`: Visualiza a versão de produção localmente (após o build).
+*   `pnpm astro`: Executa comandos da CLI do Astro (ex: `pnpm astro add tailwind`).
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🔄 Como Atualizar
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+Para atualizar o projeto e suas dependências:
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+1.  **Baixe as alterações mais recentes do código:**
+    ```bash
+    git pull origin main
+    ```
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+2.  **Atualize as dependências do projeto:**
+    Isso garante que você tenha as versões mais recentes das bibliotecas, conforme definido no `package.json`.
+    ```bash
+    pnpm install
+    ```
+    
+    Se quiser atualizar os pacotes para versões mais novas do que as definidas no lockfile:
+    ```bash
+    pnpm update
+    ```
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 🤝 Contribuição
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Consulte o arquivo [CONTRIBUTING.md](./CONTRIBUTING.md) para ver nosso guia de estilo de commits e como contribuir.
