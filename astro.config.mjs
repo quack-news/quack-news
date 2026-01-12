@@ -9,6 +9,6 @@ import keystatic from '@keystatic/astro';
 export default defineConfig({
   site: 'https://quack-news.github.io',
   base: '/',
-  trailingSlash: "always",
-  integrations: [svelte(), react(), keystatic()]
+  output: 'static',
+  integrations: [svelte()]
 });

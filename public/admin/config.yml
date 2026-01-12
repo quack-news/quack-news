@@ -1,0 +1,33 @@
+backend:
+  name: github
+  repo: quack-news/quack-news.github.io # Mude aqui se o nome do repo for diferente
+  branch: main
+  base_url: https://quack-news.github.io # Opcional, ajuda na visualização
+
+# Isso permite salvar imagens na mesma pasta do markdown (ex: noticias/slug/imagem.jpg)
+media_folder: "src/content/noticias" # Fallback
+public_folder: ""
+
+collections:
+  - name: "noticias"
+    label: "Notícias"
+    folder: "src/content/noticias"
+    create: true
+    slug: "{{slug}}/index" # Cria a estrutura de pasta: slug/index.md
+    media_folder: "" # Salva imagens na mesma pasta do post
+    public_folder: "" # Referencia imagens com caminho relativo ./imagem.jpg
+    path: "{{slug}}/index"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Descrição", name: "description", widget: "text"}
+      - {label: "Data de Publicação", name: "pubDate", widget: "datetime", format: "YYYY-MM-DD", dateFormat: "YYYY-MM-DD", timeFormat: false}
+      - {label: "Autor", name: "author", widget: "string", default: "Convidado"}
+      - {label: "Categoria", name: "category", widget: "string", default: "notícia"}
+      - {label: "Tags", name: "tags", widget: "list", default: ["Geral"]}
+      - label: "Imagem de Capa"
+        name: "image"
+        widget: "object"
+        fields:
+          - {label: "Arquivo", name: "src", widget: "image"}
+          - {label: "Texto Alternativo", name: "alt", widget: "string"}
+      - {label: "Conteúdo", name: "body", widget: "markdown"}
