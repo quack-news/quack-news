@@ -15,7 +15,9 @@ const sortedPredictions = allPredictions.sort((a, b) =>
 
 const latestEntry = sortedPredictions[0];
 
-const currentPredictions: Prediction[] = latestEntry ? latestEntry.data : [];
+const currentPredictions: Prediction[] = latestEntry
+    ? latestEntry.data.forecasts
+    : [];
 
 let formattedDate = "";
 if (latestEntry) {

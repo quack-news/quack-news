@@ -89,12 +89,14 @@ const fatosAleatorios = defineCollection({
 
 const previsoes = defineCollection({
   type: "data",
-  schema: z.array(
-    z.object({
-      nome: z.string(),
-      texto: z.string(),
-    }),
-  ),
+  schema: z.object({
+    forecasts: z.array(
+      z.object({
+        nome: z.string(),
+        texto: z.string(),
+      }),
+    ),
+  }),
 });
 
 const autores = defineCollection({

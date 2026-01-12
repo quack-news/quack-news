@@ -3,24 +3,24 @@ backend:
   repo: quack-news/quack-news.github.io
   branch: main
 
-# Isso permite salvar imagens na mesma pasta do markdown (ex: noticias/slug/imagem.jpg)
-media_folder: "src/content/noticias" # Fallback
-public_folder: ""
+media_folder: "src/assets"
+public_folder: "/src/assets"
 
 collections:
+  # --- NOTÍCIAS ---
   - name: "noticias"
     label: "Notícias"
     folder: "src/content/noticias"
     create: true
-    slug: "{{slug}}" # Apenas o slug da pasta
-    path: "{{slug}}/index" # Caminho real do arquivo: pasta/index.md
-    media_folder: "" # Salva imagens na mesma pasta do post
-    public_folder: "" # Referencia imagens com caminho relativo ./imagem.jpg
+    slug: "{{slug}}/index"
+    media_folder: "" 
+    public_folder: "" 
+    path: "{{slug}}/index"
     fields:
       - {label: "Título", name: "title", widget: "string"}
       - {label: "Descrição", name: "description", widget: "text"}
       - {label: "Data de Publicação", name: "pubDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false}
-      - {label: "Autor", name: "author", widget: "string", default: "Convidado"}
+      - {label: "Autor", name: "author", widget: "relation", collection: "autores", value_field: "name", search_fields: ["name"], display_fields: ["name"]}
       - {label: "Categoria", name: "category", widget: "string", default: "notícia"}
       - {label: "Tags", name: "tags", widget: "list", default: ["Geral"]}
       - label: "Imagem de Capa"
@@ -29,4 +29,125 @@ collections:
         fields:
           - {label: "Arquivo", name: "src", widget: "image"}
           - {label: "Texto Alternativo", name: "alt", widget: "string"}
+          - {label: "Legenda", name: "caption", widget: "string", required: false}
+      - {label: "Rascunho", name: "draft", widget: "boolean", default: false, required: false}
       - {label: "Conteúdo", name: "body", widget: "markdown"}
+
+  # --- RECEITAS ---
+  - name: "receitas"
+    label: "Receitas"
+    folder: "src/content/receitas"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Descrição", name: "description", widget: "text"}
+      - {label: "Data de Publicação", name: "pubDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false}
+      - {label: "Autor", name: "author", widget: "relation", collection: "autores", value_field: "name", search_fields: ["name"], display_fields: ["name"]}
+      - label: "Imagem"
+        name: "image"
+        widget: "object"
+        fields:
+          - {label: "Arquivo", name: "src", widget: "image"}
+          - {label: "Texto Alternativo", name: "alt", widget: "string"}
+      - {label: "Tags", name: "tags", widget: "list"}
+      
+      - {label: "Tempo de Preparo (min)", name: "prepTime", widget: "number"}
+      - {label: "Tempo de Cozimento (min)", name: "cookTime", widget: "number"}
+      - {label: "Porções", name: "servings", widget: "number"}
+      - {label: "Dificuldade", name: "difficulty", widget: "select", options: ["Fácil", "Médio", "Difícil"]}
+      
+      - label: "Ingredientes"
+        name: "ingredients"
+        widget: "list"
+        fields:
+          - {label: "Quantidade", name: "amount", widget: "number", required: false, value_type: "float"}
+          - {label: "Unidade", name: "unit", widget: "string", required: false}
+          - {label: "Nome", name: "name", widget: "string"}
+          
+      - {label: "Rascunho", name: "draft", widget: "boolean", default: false, required: false}
+      - {label: "Modo de Preparo", name: "body", widget: "markdown"}
+
+  # --- MÍDIAS ---
+  - name: "midias"
+    label: "Mídias"
+    folder: "src/content/midias"
+    create: true
+    slug: "{{slug}}/index"
+    media_folder: "" 
+    public_folder: "" 
+    path: "{{slug}}/index"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Descrição", name: "description", widget: "text"}
+      - {label: "Data de Publicação", name: "pubDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false}
+      - {label: "Autor", name: "author", widget: "relation", collection: "autores", value_field: "name", search_fields: ["name"], display_fields: ["name"]}
+      - label: "Imagem"
+        name: "image"
+        widget: "object"
+        fields:
+          - {label: "Arquivo", name: "src", widget: "image"}
+          - {label: "Texto Alternativo", name: "alt", widget: "string"}
+      
+      - {label: "Tipo", name: "type", widget: "select", options: ["Filme", "Música", "Série", "Análise", "Jogo"]}
+      - {label: "Tags", name: "tags", widget: "list"}
+      - {label: "Avaliação (0-5)", name: "rating", widget: "number", min: 0, max: 5, value_type: "float"}
+      - {label: "Plataforma", name: "platform", widget: "string", required: false}
+      - {label: "Duração", name: "duration", widget: "string", required: false}
+      
+      - {label: "Rascunho", name: "draft", widget: "boolean", default: false, required: false}
+      - {label: "Conteúdo", name: "body", widget: "markdown"}
+
+  # --- FATOS ALEATÓRIOS ---
+  - name: "fatos-aleatorios"
+    label: "Fatos Aleatórios"
+    folder: "src/content/fatos-aleatorios"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Fato (Título)", name: "title", widget: "string", pattern: ['.{1,200}', "Máximo de 200 caracteres"]}
+      - {label: "Data", name: "pubDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false}
+      - {label: "Fonte (URL)", name: "source", widget: "string"}
+      - {label: "Tags", name: "tags", widget: "list"}
+      - {label: "Rascunho", name: "draft", widget: "boolean", default: false, required: false}
+      - {label: "Detalhes (Opcional)", name: "body", widget: "markdown", required: false}
+
+  # --- PREVISÕES ---
+  - name: "previsoes"
+    label: "Previsões Semanais"
+    folder: "src/content/previsoes"
+    create: true
+    extension: "yaml"
+    format: "yaml"
+    fields:
+      - {label: "Identificador (Slug)", name: "title", widget: "string"}
+      - label: "Previsões"
+        name: "forecasts"
+        widget: "list"
+        fields:
+          - {label: "Nome", name: "nome", widget: "string"}
+          - {label: "Previsão", name: "texto", widget: "text"}
+
+  # --- AUTORES ---
+  - name: "autores"
+    label: "Autores"
+    folder: "src/content/autores"
+    create: true
+    extension: "toml"
+    format: "toml"
+    slug: "{{slug}}"
+    media_folder: "avatars"
+    public_folder: "./avatars"
+    fields:
+      - {label: "Nome", name: "name", widget: "string"}
+      - {label: "Avatar", name: "avatar", widget: "image"}
+      - {label: "Biografia", name: "bio", widget: "text"}
+      - label: "Redes Sociais"
+        name: "socials"
+        widget: "object"
+        required: false
+        fields:
+          - {label: "Twitter", name: "twitter", widget: "string", required: false}
+          - {label: "Instagram", name: "instagram", widget: "string", required: false}
+          - {label: "LinkedIn", name: "linkedin", widget: "string", required: false}
+          - {label: "Last.fm", name: "last_fm", widget: "string", required: false}
