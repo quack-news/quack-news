@@ -1,8 +1,7 @@
 backend:
   name: github
-  repo: quack-news/quack-news.github.io # Mude aqui se o nome do repo for diferente
+  repo: quack-news/quack-news.github.io
   branch: main
-  base_url: https://quack-news.github.io # Opcional, ajuda na visualização
 
 # Isso permite salvar imagens na mesma pasta do markdown (ex: noticias/slug/imagem.jpg)
 media_folder: "src/content/noticias" # Fallback
